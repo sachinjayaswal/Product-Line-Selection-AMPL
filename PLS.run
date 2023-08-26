@@ -1,0 +1,18 @@
+#---------RUN FILE----------------
+reset;
+model PLS_1level_a.mod;
+data PLS_10_5.dat;
+#option solver cplexamp;# if IBM CPLEx is also installed
+option solver cplex;
+option show_stats 1;
+option cplex_options 'mipdisplay=4 mipinterval=2';#Extent to which display B&B Search info
+solve;
+option omit_zero_rows 1;#Do not display variables that have 0 values;
+option omit_zero_cols 1;#Do not display variables that have 0 values;
+display _total_solve_time >Output_PLS.txt;
+display Profit>Output_PLS.txt;
+display Develop>Output_PLS.txt;
+display Buy>Output_PLS.txt;
+expand>Output_PLS.txt;
+close Output_PLS.txt;
+#---------END OF RUN FILE----------------
